@@ -23,9 +23,38 @@ function drawChart(canvasId, title, outputKey, values) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+
+      layout: {
+        padding: {
+          top: 10,
+          bottom: 30, // ← ruang untuk sumbu X
+          left: 10,
+          right: 10,
+        },
+      },
+
+      scales: {
+        x: {
+          ticks: {
+            padding: 8, // ← jarak label X dari chart
+            maxRotation: 0,
+            autoSkip: true,
+          },
+        },
+        y: {
+          ticks: {
+            padding: 6,
+          },
+        },
+      },
+
       plugins: {
-        title: { display: true, text: title },
-        legend: { position: "top" },
+        legend: {
+          labels: {
+            boxWidth: 30,
+            padding: 12,
+          },
+        },
       },
     },
   });

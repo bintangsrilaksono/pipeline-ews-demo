@@ -42,12 +42,19 @@ function renderAlerts() {
 
       if (status === "Normal") return; // hanya tampilkan yg warning/critical
 
+      const statusDot =
+        status === "Critical"
+          ? `<span class="status-dot status-critical" title="Critical"></span>`
+          : status === "Warning"
+            ? `<span class="status-dot status-warning" title="Warning"></span>`
+            : `<span class="status-dot status-normal" title="Normal"></span>`;
+
       const tr = document.createElement("tr");
 
       tr.innerHTML = `
         <td>${location.replace("M", "")} m</td>
         <td>${config.label}</td>
-        <td>${status}</td>
+        <td class="status-cell">${statusDot}</td>
         <td>${maxValue.toFixed(2)}</td>
         <td>${status === "Critical" ? config.critical : config.warning}</td>
         <td>${currentRange}</td>

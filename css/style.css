@@ -278,14 +278,27 @@ body {
   background: #e0f2fe;
 }
 
-.status-warning {
-  color: #f59e0b;
-  font-weight: bold;
+.status-cell {
+  text-align: center;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
 }
 
 .status-critical {
-  color: #dc2626;
-  font-weight: bold;
+  background-color: #dc2626; /* merah */
+}
+
+.status-warning {
+  background-color: #f59e0b; /* kuning */
+}
+
+.status-normal {
+  background-color: #16a34a; /* hijau (tidak muncul karena Normal disembunyikan) */
 }
 
 .risk-low {
