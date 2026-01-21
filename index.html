@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,58 +8,135 @@
   </head>
 
   <body>
-    <div class="sidebar">
-      <h2>EWMS</h2>
-      <ul class="time-range">
-        <li data-range="daily" class="active">Daily</li>
-        <li data-range="weekly">Weekly</li>
-        <li data-range="monthly">Monthly</li>
-        <li data-range="yearly">Yearly</li>
-      </ul>
-    </div>
+    <div class="app">
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <h2>PIPELINE EWMS</h2>
 
-    <div class="main">
-      <h1>Pipeline Monitoring (1000 m)</h1>
-
-      <div class="pipeline">
-        <div class="pipeline-scale">
-          <span>0 m</span>
-          <span>100 m</span>
-          <span>200 m</span>
-          <span>300 m</span>
-          <span>400 m</span>
-          <span>500 m</span>
-          <span>600 m</span>
-          <span>700 m</span>
-          <span>800 m</span>
-          <span>900 m</span>
-          <span>1000 m</span>
+        <div class="sidebar-menu">
+          <div class="menu-item active" data-view="pipeline">Pipeline View</div>
+          <div class="menu-item" data-view="overview">Overview</div>
+          <div class="menu-item" data-view="sensor">Sensor Detail</div>
+          <div class="menu-item" data-view="alerts">Alerts</div>
+          <div class="menu-item" data-view="reports">Reports</div>
         </div>
 
-        <div class="pipe-line"></div>
-        <div id="pipeline-nodes"></div>
-      </div>
-
-      <div class="charts">
-        <div class="chart-box">
-          <h3>Inclinometer</h3>
-          <canvas id="inclinometerChart"></canvas>
-        </div>
-        <div class="chart-box">
-          <h3>Tilt Meter</h3>
-          <canvas id="tiltChart"></canvas>
-        </div>
-        <div class="chart-box">
-          <h3>GNSS</h3>
-          <canvas id="gnssChart"></canvas>
-        </div>
-        <div class="chart-box">
-          <h3>Piezometer</h3>
-          <canvas id="piezometerChart"></canvas>
+        <div class="sidebar-time-filter">
+          <div class="time-filter-title">Time Filter</div>
+          <ul class="time-range">
+            <li data-range="daily" class="active">Daily</li>
+            <li data-range="weekly">Weekly</li>
+            <li data-range="monthly">Monthly</li>
+            <li data-range="yearly">Yearly</li>
+          </ul>
         </div>
       </div>
+
+      <!-- MAIN -->
+      <div class="main">
+        <!-- ================= OVERVIEW ================= -->
+        <section id="view-overview" class="view">
+          <!-- Rendered by overviewView.js -->
+        </section>
+
+        <!-- ================= PIPELINE VIEW ================= -->
+        <section id="view-pipeline" class="view active">
+          <h1>Pipeline Monitoring (1000 m)</h1>
+
+          <div class="pipeline">
+            <div class="pipeline-scale">
+              <span>0 m</span><span>100 m</span><span>200 m</span>
+              <span>300 m</span><span>400 m</span><span>500 m</span>
+              <span>600 m</span><span>700 m</span><span>800 m</span>
+              <span>900 m</span><span>1000 m</span>
+            </div>
+
+            <div class="pipe-line"></div>
+            <div id="pipeline-nodes"></div>
+          </div>
+
+          <!-- DASHBOARD: 4 OUTPUT DARI INCLINOMETER -->
+          <div class="charts">
+            <div class="chart-box">
+              <h3 id="chart-title-1">Tilt Angle (deg)</h3>
+              <canvas id="chart-1"></canvas>
+            </div>
+
+            <div class="chart-box">
+              <h3 id="chart-title-2">Local Displacement (mm)</h3>
+              <canvas id="chart-2"></canvas>
+            </div>
+
+            <div class="chart-box">
+              <h3 id="chart-title-3">Cumulative Displacement (mm)</h3>
+              <canvas id="chart-3"></canvas>
+            </div>
+
+            <div class="chart-box">
+              <h3 id="chart-title-4">Settlement (mm)</h3>
+              <canvas id="chart-4"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= SENSOR DETAIL ================= -->
+        <section id="view-sensor" class="view">
+          <h1>Sensor Detail</h1>
+
+          <div class="sensor-detail-header">
+            <label>
+              Location:
+              <select id="sensor-location-select"></select>
+            </label>
+
+            <label>
+              Output Channel:
+              <select id="sensor-output-select"></select>
+            </label>
+          </div>
+
+          <div class="sensor-meta" id="sensor-meta"></div>
+
+          <div class="sensor-chart-box">
+            <canvas id="sensorDetailChart"></canvas>
+          </div>
+
+          <div class="sensor-insight" id="sensor-insight"></div>
+        </section>
+
+        <!-- ================= ALERTS ================= -->
+        <section id="view-alerts" class="view">
+          <h1>Active Alerts</h1>
+
+          <table class="alerts-table">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Output Channel</th>
+                <th>Status</th>
+                <th>Max Value</th>
+                <th>Threshold</th>
+                <th>Range</th>
+                <th>Risk Level</th>
+              </tr>
+            </thead>
+            <tbody id="alerts-tbody"></tbody>
+          </table>
+        </section>
+
+        <!-- ================= REPORTS ================= -->
+        <section id="view-reports" class="view">
+          <h1>Reports</h1>
+          <p>Coming soon</p>
+        </section>
+      </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script type="module" src="js/logic/pipelineView.js"></script>
+    <script type="module" src="js/logic/overviewView.js"></script>
+    <script type="module" src="js/logic/sensorDetailView.js"></script>
+    <script type="module" src="js/logic/alertsView.js"></script>
+    <script type="module" src="js/logic/menuController.js"></script>
   </body>
 </html>
